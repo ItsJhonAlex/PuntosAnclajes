@@ -26,6 +26,10 @@ class Recertification extends Model
         'id_empresa'
     ];
 
+    protected $casts = [
+        'fecha_recertificacion' => 'date',
+    ];
+
     public function empresa()
     {
         return $this->belongsTo(Empresa::class, 'id_empresa');

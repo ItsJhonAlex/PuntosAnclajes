@@ -95,7 +95,7 @@
                                                 <label for="fecha_recertificacion" class="form-label">Fecha de recertificación *</label>
                                                 <input type="date" class="form-control" id="fecha_recertificacion" 
                                                     name="fecha_recertificacion" 
-                                                    value="{{ old('fecha_recertificacion', $recertification->fecha_recertificacion) }}" required>
+                                                    value="{{ old('fecha_recertificacion', $recertification->fecha_recertificacion ? $recertification->fecha_recertificacion->format('Y-m-d') : '') }}" required>
                                             </div>
                                         </div>
                                     </div>
