@@ -1,0 +1,50 @@
+/* Ajusta el tamaño de los enlaces de la paginación */
+.pagination .page-link {
+    font-size: 0.75rem; /* Ajusta el tamaño de la fuente */
+    padding: 0.25rem 0.5rem; /* Ajusta el padding para reducir el tamaño */
+}
+
+.pagination .page-item .page-link {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Ajusta el tamaño de los íconos de Bootstrap Icons si es necesario */
+.pagination .page-link .bi {
+    font-size: 0.75rem; /* Ajusta el tamaño del ícono aquí */
+}
+
+/* Ajusta el tamaño de los íconos de Font Awesome si es necesario */
+.pagination .page-link .fa {
+    font-size: 0.75rem; /* Ajusta el tamaño del ícono aquí */
+}
+
+
+/* Inicialmente ocultar el contenido de diferencias */
+.difference-content {
+    max-height: 100px;
+    overflow: hidden;
+    transition: max-height 0.3s ease;
+}
+
+.difference-content.expanded {
+    max-height: 100%;
+}
+
+.expand-btn {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    margin-top: 10px;
+    cursor: pointer;
+    font-size: 0.9em;
+    border-radius: 5px;
+    display: inline-block;
+    text-align: center;
+}
+
+.expand-btn:hover {
+    background-color: #0056b3;
+}

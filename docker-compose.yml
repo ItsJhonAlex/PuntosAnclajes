@@ -1,0 +1,73 @@
+version: '3.8'
+
+services:
+  # 🗄️ MySQL Database Service
+  mysql:
+    image: mysql:5.7
+    container_name: isi_puntos_mysql
+    restart: unless-stopped
+    environment:
+      MYSQL_ROOT_PASSWORD: root_password_123
+      MYSQL_DATABASE: isi_puntos_anclajes
+      MYSQL_USER: laravel_user
+      MYSQL_PASSWORD: laravel_pass_123
+    ports:
+      - "3306:3306"
+    volumes:
+      - mysql_data:/var/lib/mysql
+      - ./docker/mysql/init:/docker-entrypoint-initdb.d
+    networks:
+      - isi_network
+
+  # 🔴 Redis Cache Service
+  redis:
+    image: redis:7-alpine
+    container_name: isi_puntos_redis
+    restart: unless-stopped
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis_data:/data
+    command: redis-server --appendonly yes
+    networks:
+      - isi_network
+
+  # 📧 MailHog (Local Mail Testing)
+  mailhog:
+    image: mailhog/mailhog
+    container_name: isi_puntos_mailhog
+    restart: unless-stopped
+    ports:
+      - "1025:1025"  # SMTP
+      - "8025:8025"  # Web UI
+    networks:
+      - isi_network
+
+  # 📊 phpMyAdmin (Database Management)
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin
+    container_name: isi_puntos_phpmyadmin
+    restart: unless-stopped
+    environment:
+      PMA_HOST: mysql
+      PMA_USER: laravel_user
+      PMA_PASSWORD: laravel_pass_123
+      MYSQL_ROOT_PASSWORD: root_password_123
+    ports:
+      - "8080:80"
+    depends_on:
+      - mysql
+    networks:
+      - isi_network
+
+# 💾 Persistent Volume Storage
+volumes:
+  mysql_data:
+    driver: local
+  redis_data:
+    driver: local
+
+# 🌐 Network Configuration
+networks:
+  isi_network:
+    driver: bridge 
